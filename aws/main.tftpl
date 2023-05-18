@@ -1,0 +1,23 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4"
+    }
+  }
+}
+
+provider "aws" {
+    region = "${region}"
+}
+
+module "dlm_policy" {
+  source = "../../modules/dlm"
+
+  iam_role_arn = "${iam_role_arn}"
+
+  dlm_lifecycle_policy_name = "${dlm_lifecycle_policy_name}"
+  target_tag                = "${target_tag}"
+  resource_tags_string      = "${resource_tags_string}"
+}
+
